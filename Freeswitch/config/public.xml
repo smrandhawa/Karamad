@@ -1,0 +1,273 @@
+<!--
+    NOTICE:
+
+    This context is usually accessed via the external sip profile listening on port 5080.
+    
+    It is recommended to have separate inbound and outbound contexts.  Not only for security
+    but clearing up why you would need to do such a thing.  You don't want outside un-authenticated
+    callers hitting your default context which allows dialing calls thru your providers and results 
+    in Toll Fraud.
+-->
+
+<!-- http://wiki.freeswitch.org/wiki/Dialplan_XML -->
+<include>
+  <context name="public">
+ <extension name="polly_ivr">
+      <condition field="destination_number" expression="^(0428333112)$">
+        <action application="pre_answer"/>
+        <action application="playback" data="D:\xampp\htdocs\MVP\polly_end.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+        <!-- <action application="hangup" data="SERVICE_UNAVAILABLE"/>  -->
+        <!-- <action application="lua" data="IncomingHook.lua"/>    -->
+      </condition>
+    </extension>
+ 
+  <extension name="smart_surveys">
+    <condition field="destination_number" expression="^(0428333116)$">
+      <action application="pre_answer"/>
+      <action application="lua" data="survey.lua ${uuid}"/>
+    </condition>
+  </extension>
+
+ <extension name="qiuz_ivr">
+      <condition field="destination_number" expression="^(0428333114)$">
+        <!--<action application="hangup" data="SERVICE_UNAVAILABLE"/>-->
+        <!--<action application="lua" data="CoronaTesting.lua ${uuid}"/>-->
+         <!--<action application="lua" data="IncomingBaangHookTest.lua ${uuid}"/>-->
+<!--        <action application="lua" data="IncomingPQuizHook.lua"/> -->
+      </condition>
+    </extension>
+	
+	<extension name="baang_ivr">
+      <condition field="destination_number" expression="^(0428333115)$">
+      <!--  <action application="hangup" data="SERVICE_UNAVAILABLE"/>  -->
+        <!--<action application="lua" data="IncomingBaangHook.lua ${uuid}"/>-->
+        <!-- Corona walay k liye bas nichli line uncomment karen   -->
+        <!--<action application="lua" data="IncomingBaangHookTest.lua ${uuid}"/>-->
+
+        <action application="pre_answer" />
+         <action application="lua" data="CoronaTesting.lua ${uuid}"/>
+        
+      </condition>
+    </extension>
+<!-- NIH
+  <extension name="test_ivr2">
+      <condition field="destination_number" expression="^(0428900800)$">
+         <action application="pre_answer"/> 
+         <action application="playback" data="D:\xampp\htdocs\wa\prompts\call-kerny-ka-shukriya.wav"/> -->
+        <!-- <action application="hangup" data="SERVICE_UNAVAILABLE"/> -->
+        <!-- <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/>  -->
+        <!-- <action application="hangup" data="SERVICE_UNAVAILABLE"/>  -->
+    <!-- NIH   <action application="lua" data="IncomingReM.lua"/>   
+      </condition>
+    </extension>
+  -->
+
+    <!--NIH testing-->
+    <extension name="NIH-test">
+      <!-- 04238333113 , 0428900801 -->
+      <condition field="destination_number" expression="^(0428900800)$">
+        <!-- comment following one line - Namoos-->
+        <!--<action application="pre_answer" />
+         <action application="lua" data="CoronaTesting.lua ${uuid}"/>
+        -->
+         <!-- and following one line - Namoos-->
+         <!--<action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/>-->
+          <action application="hangup"/>
+      </condition>
+    </extension>
+
+
+    <extension name="NIH-test">
+      <condition field="destination_number" expression="^(0428900801)$">
+        <!--<action application="lua" data="SASincoming.lua ${uuid}"/>-->
+         <!--<action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/>-->
+          <action application="hangup"/>
+      </condition>
+    </extension>
+
+    <extension name="NIH-test">
+      <condition field="destination_number" expression="^(0428900802)$">
+        <!--<action application="lua" data="SABincoming.lua ${uuid}"/>-->
+         <!--<action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/>-->
+          <action application="hangup"/>
+      </condition>
+    </extension>    
+
+    <extension name="NIH-test">
+      <condition field="destination_number" expression="^(0428900803)$">
+        <action application="lua" data="SAAincoming.lua ${uuid}"/>
+         <!--<action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/>-->
+          <action application="hangup"/>
+      </condition>
+    </extension>
+
+    <!--NIH testing-->
+
+  <!-- <extension name="test_ivr_mvp_1">
+      <condition field="destination_number" expression="^(0428900801)$">
+         <action application="pre_answer"/> 
+      
+        <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+    </condition>
+  </extension>
+  -->
+
+  <extension name="test_ivr_mvp_2">
+      <condition field="destination_number" expression="^(0428900802)$">
+         <action application="pre_answer"/> 
+        <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+      <!-- <action application="lua" data="IncomingReM.lua"/>    -->
+    </condition>
+  </extension>
+
+  <extension name="test_ivr_mvp_3">
+      <condition field="destination_number" expression="^(0428900803)$">
+         <action application="pre_answer"/> 
+        <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+      <!-- <action application="lua" data="IncomingReM.lua"/>    -->
+    </condition>
+  </extension>
+
+  <extension name="test_ivr_mvp_4">
+      <condition field="destination_number" expression="^(0428900804)$">
+         <action application="pre_answer"/> 
+        <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+      <!-- <action application="lua" data="IncomingReM.lua"/>    -->
+    </condition>
+  </extension>
+
+  <extension name="test_ivr_mvp_5">
+      <condition field="destination_number" expression="^(0428900805)$">
+         <action application="pre_answer"/> 
+      <!-- <action application="lua" data="IncomingReM.lua"/>    -->
+       <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+
+    </condition>
+  </extension>
+
+  <extension name="test_ivr_mvp_6">
+      <condition field="destination_number" expression="^(0428900806)$">
+         <action application="pre_answer"/> 
+        <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+      <!-- <action application="lua" data="IncomingReM.lua"/>    -->
+    </condition>
+  </extension>
+  <extension name="test_ivr_mvp_7">
+      <condition field="destination_number" expression="^(0428900807)$">
+         <action application="pre_answer"/> 
+        <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+      <!-- <action application="lua" data="IncomingReM.lua"/>    -->
+    </condition>
+  </extension>
+
+  <extension name="test_ivr_mvp_8">
+      <condition field="destination_number" expression="^(0428900808)$">
+         <action application="pre_answer"/> 
+        <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+      <!-- <action application="lua" data="IncomingReM.lua"/>    -->
+    </condition>
+  </extension>
+
+  <extension name="test_ivr_mvp_9">
+      <condition field="destination_number" expression="^(0428900809)$">
+         <action application="pre_answer"/> 
+        <action application="playback" data="D:\xampp\htdocs\MVP\Saend.wav"/> 
+        <action application="hangup" data="NORMAL_CLEARING"/>
+      <!-- <action application="lua" data="IncomingReM.lua"/>    -->
+    </condition>
+  </extension>
+
+  <extension name="test_ivr3">
+      <condition field="destination_number" expression="^(0428901101)$">
+        <action application="pre_answer"/>
+        <action application="hangup" data="SERVICE_UNAVAILABLE"/>
+        <!-- <action application="lua" data="IncomingReM.lua"/>   -->
+      </condition>
+    </extension>
+ 
+  <extension name="Baang_new_ivr">
+    <condition field="destination_number" expression="^(0428900807)$">
+      <action application="lua" data="IncomingBaangRejectHook.lua"/>
+    </condition>
+  </extension>
+
+  <!--<extension name="Baang_new_ivr_callin">
+    <condition field="destination_number" expression="^(0428333116)$">
+      <action application="lua" data="IncomingBaangHook.lua ${caller_id_number}"/>
+      </condition>
+  </extension>-->
+
+
+    <extension name="did_0428900810">
+                       <condition field="destination_number" expression="^(0428900810)$">
+                        <action application="set" data="proxy_media=true"/>
+                        <action application="set" data="continue_on_fail=true"/>
+                        <action application="set" data="hangup_after_bridge=true"/>
+              <action application="bridge" data="sofia/external/$1@192.168.102.112"/>
+
+
+                </condition>
+        </extension>  
+
+  <extension name="unloop">
+      <condition field="${unroll_loops}" expression="^true$"/>
+      <condition field="${sip_looped_call}" expression="^true$">
+	       <action application="deflect" data="${destination_number}"/>
+      </condition>
+    </extension>
+    <!--
+	Tag anything pass thru here as an outside_call so you can make sure not
+	to create any routing loops based on the conditions that it came from 
+	the outside of the switch.  
+    -->
+    <extension name="outside_call" continue="true">
+      <condition>
+	<action application="set" data="outside_call=true"/>
+	<action application="export" data="RFC2822_DATE=${strftime(%a, %d %b %Y %T %z)}"/>
+      </condition>
+    </extension>
+
+    <extension name="call_debug" continue="true">
+      <condition field="${call_debug}" expression="^true$" break="never">
+	<action application="info"/>
+      </condition>
+    </extension>
+
+    <extension name="public_extensions">
+      <condition field="destination_number" expression="^(10[01][0-9])$">
+	   <action application="transfer" data="$1 XML default"/>
+      </condition>
+    </extension>
+    
+    <!--
+	You can place files in the public directory to get included.
+    -->
+    <X-PRE-PROCESS cmd="include" data="public/*.xml"/>
+    <!--
+	If you have made it this far lets challenge the caller and if they authenticate
+	lets try what they dialed in the default context. (commented out by default)
+    -->
+    <!--
+    <extension name="check_auth" continue="true">
+      <condition field="${sip_authorized}" expression="^true$" break="never">
+	<anti-action application="respond" data="407"/>
+      </condition>
+    </extension>
+    
+    <extension name="transfer_to_default">
+      <condition>
+	<action application="transfer" data="${destination_number} XML default"/>
+      </condition>
+    </extension>
+    -->
+  </context>
+</include>
